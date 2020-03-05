@@ -15,45 +15,42 @@ A solution set is:
 
 package medium
 
-// TODO: Time Limit Exceeded! This is O(n^3), try better! Sort first and then calculate! Redo this problem.
+import "sort"
+
 func threeSum(nums []int) [][]int {
 	length := len(nums)
+
+	if length < 3 {
+		return nil
+	}
+
 	result := make([][]int, 0)
-	for i := 0; i < length-2; i++ {
-		for j := i + 1; j < length-1; j++ {
-			for k := j + 1; k < length; k++ {
-				if nums[i]+nums[j]+nums[k] == 0 {
-					result = appendToResult(result, nums[i], nums[j], nums[k])
+	sort.Ints(nums)
+
+	for cursor, cursorVal := range nums[:length-2] {
+		if cursor > 0 && nums[cursor] == nums[cursor-1] {
+			continue
+		}
+		start := cursor + 1
+		end := length - 1
+		for start < end {
+			sum := cursorVal + nums[start] + nums[end]
+			if sum > 0 {
+				end--
+			} else if sum < 0 {
+				start++
+			} else {
+				result = append(result, []int{cursorVal, nums[start], nums[end]})
+				for start < end && nums[start] == nums[start+1] {
+					start++
 				}
+				for start < end && nums[end] == nums[end-1] {
+					end--
+				}
+				start++
+				end--
 			}
 		}
 	}
-
 	return result
-}
-
-func appendToResult(result [][]int, i int, j int, k int) [][]int {
-	var arr []int
-	var length = len(result)
-	if i <= j && j <= k {
-		arr = []int{i, j, k}
-	} else if i <= k && k <= j {
-		arr = []int{i, k, j}
-	} else if j <= i && i <= k {
-		arr = []int{j, i, k}
-	} else if j <= k && k <= i {
-		arr = []int{j, k, i}
-	} else if k <= j && j <= i {
-		arr = []int{k, j, i}
-	} else {
-		arr = []int{k, i, j}
-	}
-
-	for i := 0; i < length; i++ {
-		if result[i][0] == arr[0] && result[i][1] == arr[1] && result[i][2] == arr[2] {
-			return result
-		}
-	}
-
-	return append(result, arr)
 }
