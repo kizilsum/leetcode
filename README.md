@@ -1,2 +1,2 @@
 # leetcode
-LeetCode problem solutions.
+LeetCode problem solutions in GoLang.
