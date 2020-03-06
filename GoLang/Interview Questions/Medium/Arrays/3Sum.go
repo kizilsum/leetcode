@@ -13,7 +13,7 @@ A solution set is:
 ]
 */
 
-package medium_arrays
+package medium
 
 import "sort"
 

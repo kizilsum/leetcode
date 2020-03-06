@@ -37,7 +37,7 @@ In principle, the board is infinite, which would cause problems when the active 
 How would you address these problems?
 */
 
-package hard_arrays
+package hard
 
 func gameOfLife(board [][]int) {
 	temp := make([][]int, len(board))

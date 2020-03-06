@@ -10,7 +10,7 @@ Note:
 Although the above answer is in lexicographical order, your answer could be in any order you want.
 */
 
-package medium_backtracking
+package medium
 
 func letterCombinations(digits string) []string {
 	m := map[rune][]string{
