@@ -21,27 +21,23 @@ Explanation: It's the substring "abc" four times. (And the substring "abcabc" tw
 package easy
 
 func repeatedSubstringPattern(s string) bool {
-	mid := (len(s) / 2) + 1
-	runes := []rune(s)
-	for sub := 1; sub < mid; sub++ {
-		if isSubRepeated(runes[0:sub], runes) {
-			return true
+	length := len(s)
+loop:
+	for i := 2; i < length/2; i++ {
+		if length%i != 0 {
+			continue
 		}
+
+		subLength := length / i
+
+		for j := 0; j < subLength; j++ {
+			for k := 0; k < i; k++ {
+				if s[i*j+k] != s[k] {
+					continue loop
+				}
+			}
+		}
+		return true
 	}
 	return false
-}
-
-func isSubRepeated(sub []rune, runes []rune) bool {
-	for i := 0; i < len(runes); {
-		for j := 0; j < len(sub); j++ {
-			if i >= len(runes) {
-				return false
-			}
-			if runes[i] != sub[j] {
-				return false
-			}
-			i++
-		}
-	}
-	return true
 }
