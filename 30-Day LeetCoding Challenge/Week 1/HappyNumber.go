@@ -41,9 +41,8 @@ func isHappy(n int) bool {
 
 		if found {
 			return false
-		} else {
-			m[n] = true
 		}
+		m[n] = true
 	}
 }
 
