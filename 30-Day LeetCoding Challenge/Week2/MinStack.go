@@ -19,45 +19,57 @@ minStack.getMin();   --> Returns -2.
 
 package week2
 
+// MaxUint constant.
 const MaxUint = ^uint(0)
+
+// MinUint constant.
 const MinUint = 0
+
+// MaxInt constant.
 const MaxInt = int(MaxUint >> 1)
+
+// MinInt constant.
 const MinInt = -MaxInt - 1
 
+// MinStack struct.
 type MinStack struct {
 	stack    []int
 	minStack []int
 }
 
-/** initialize your data structure here. */
+// Constructor for MinStack struct.
 func Constructor() MinStack {
 	m := MinStack{stack: []int{}, minStack: []int{}}
 	return m
 }
 
-func (this *MinStack) Push(x int) {
-	this.stack = append(this.stack, x)
-	minLen := len(this.minStack)
-	if minLen == 0 || x <= this.minStack[minLen-1] {
-		this.minStack = append(this.minStack, x)
+// Push method for MinStack
+func (m *MinStack) Push(x int) {
+	m.stack = append(m.stack, x)
+	minLen := len(m.minStack)
+	if minLen == 0 || x <= m.minStack[minLen-1] {
+		m.minStack = append(m.minStack, x)
 	}
 }
 
-func (this *MinStack) Pop() {
-	stackLen := len(this.stack)
-	minLen := len(this.minStack)
-	if this.stack[stackLen-1] == this.minStack[minLen-1] {
-		this.minStack = this.minStack[0 : minLen-1]
+// Pop method for MinStack
+func (m *MinStack) Pop() {
+	stackLen := len(m.stack)
+	minLen := len(m.minStack)
+	if m.stack[stackLen-1] == m.minStack[minLen-1] {
+		m.minStack = m.minStack[0 : minLen-1]
 	}
-	this.stack = this.stack[0 : stackLen-1]
+	m.stack = m.stack[0 : stackLen-1]
 }
 
-func (this *MinStack) Top() int {
-	return this.stack[len(this.stack)-1]
+// Top method for MinStack
+func (m *MinStack) Top() int {
+	return m.stack[len(m.stack)-1]
 }
 
-func (this *MinStack) GetMin() int {
-	return this.minStack[len(this.minStack)-1]
+// GetMin method for MinStack
+func (m *MinStack) GetMin() int {
+	return m.minStack[len(m.minStack)-1]
 }
 
 /**
